@@ -23,12 +23,14 @@ def make_unique_names(raw_data):
         if itemLabel not in data:
             data[itemLabel] = {}
         for t in types:
-            if t in data[itemLabel] and t in item:
-                if data[itemLabel][t] and item[t] != data[itemLabel][t]:
-                    data[itemLabel][t] = set([item[t]]) | data[itemLabel][t]
-            elif t in item:
-                if t == 'death_year' or t == 'sexLabel':
+            if t in item:
+                if t == 'sexLabel':
                     data[itemLabel][t] = item[t]
+                if t == 'death_year':
+                    data[itemLabel][t] = item[t][:4]
+                elif t in data[itemLabel]:
+                    if data[itemLabel][t] and item[t] != data[itemLabel][t]:
+                        data[itemLabel][t] = set([item[t]]) | data[itemLabel][t]
                 else:
                     data[itemLabel][t] = set([item[t]])
             else:
@@ -39,8 +41,9 @@ def make_unique_names(raw_data):
             
 
 def main():
-##  with open('test.json', 'w', encoding='utf-8') as f:
-##  f.write(json.dumps(data[:100]))
+##    data = open_json('net.json')
+##    with open('test.json', 'w', encoding='utf-8') as f:
+##        f.write(json.dumps(data[:100]))
     data = open_json('test.json')
     print(make_unique_names(data))
     
