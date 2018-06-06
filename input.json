@@ -1,0 +1,9 @@
+[{"itemLabel":"1", "langLabel":"rus", "death_year":"2010", "sexLabel":"male", "occupationLabel":"linguist"},
+{"itemLabel":"1", "langLabel":"rus", "death_year":"2010", "sexLabel":"male", "occupationLabel":"writer"},
+{"itemLabel":"1", "langLabel":"rus", "death_year":"2010", "sexLabel":"male", "occupationLabel":"poet"},
+{"itemLabel":"1", "langLabel":"eng", "death_year":"2010", "sexLabel":"male", "occupationLabel":"linguist"},
+{"itemLabel":"1", "langLabel":"eng", "death_year":"2010", "sexLabel":"male", "occupationLabel":"writer"},
+{"itemLabel":"1", "langLabel":"eng", "death_year":"2010", "sexLabel":"male", "occupationLabel":"poet"},
+{"itemLabel":"1", "langLabel":"rus", "death_year":"2010", "sexLabel":"male", "occupationLabel":"writer"},
+{"itemLabel":"2", "langLabel":"rus", "sexLabel":"female", "occupationLabel":"poet"},
+{"itemLabel":"2", "langLabel":"rus", "sexLabel":"female", "occupationLabel":"writer"}]
