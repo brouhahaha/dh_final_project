@@ -6,6 +6,12 @@ def open_json(filename):
         data = json.loads(f.read())
     return data
 
+def write_json(js, f):
+    with open(f, 'w', encoding='utf-8') as f:
+        f.write(json.dumps(js, ensure_ascii=False))
+    print('File successfully written.')
+
+
 ##    {'itemLabel': 'Авраам-Бер Готлобер',
 ##     'langLabel': 'иврит',
 ##     'lang': 'http://www.wikidata.org/entity/Q9288',
@@ -26,13 +32,13 @@ def make_unique_names(raw_data):
             if t in item:
                 if t == 'sexLabel':
                     data[itemLabel][t] = item[t]
-                if t == 'death_year':
+                elif t == 'death_year':
                     data[itemLabel][t] = item[t][:4]
                 elif t in data[itemLabel]:
-                    if data[itemLabel][t] and item[t] != data[itemLabel][t]:
-                        data[itemLabel][t] = set([item[t]]) | data[itemLabel][t]
+                    if data[itemLabel][t] and item[t] not in data[itemLabel][t]:
+                        data[itemLabel][t].append(item[t])
                 else:
-                    data[itemLabel][t] = set([item[t]])
+                    data[itemLabel][t] = [item[t]]
             else:
                 data[itemLabel][t] = None  
     return data
@@ -44,8 +50,8 @@ def main():
 ##    data = open_json('net.json')
 ##    with open('test.json', 'w', encoding='utf-8') as f:
 ##        f.write(json.dumps(data[:100]))
-    data = open_json('test.json')
-    print(make_unique_names(data))
+    data = open_json('net.json')
+    write_json(make_unique_names(data), 'results.json')
     
 
 

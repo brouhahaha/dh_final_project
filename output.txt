@@ -1,1 +1,0 @@
-{'2': {'sexLabel': 'female', 'death_year': None, 'langLabel': {'rus'}, 'occupationLabel': {'poet', 'writer'}}, '1': {'sexLabel': 'male', 'death_year': '2010', 'langLabel': {'eng', 'rus'}, 'occupationLabel': {'poet', 'writer', 'linguist'}}}
