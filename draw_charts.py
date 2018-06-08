@@ -7,6 +7,7 @@ import json
 ##общий график профессий
 def count_all(dic):
     occup = {}
+    temp = 0
     for k in dic:
         if dic[k]['occupationLabel']:
             for i in dic[k]['occupationLabel']:
@@ -14,14 +15,15 @@ def count_all(dic):
                     occup[i] += 1
                 else:
                     occup[i] = 1
+                temp += 1
     musor = ['автор', 'проза', 'драматургия', 'писатель', 'поэт', 'автор дневника', 'публицистика', 'мемуарист',
              'автобиограф', 'писатель-фантаст', 'детский писатель', 'романист', 'биограф', 'прозаик', 'эссеист',
              'новеллист', 'поэт-песенник']
-    ys = [occup[n] for n in occup if occup[n] > 5 and n not in musor]
+    ys = [(occup[n]/temp)*100 for n in occup if occup[n] > 5 and n not in musor]
     xs = [n for n in occup if occup[n] > 5 and n not in musor]
     df = pd.DataFrame(dict(x=xs, y=ys))
-    ax = sns.factorplot("x", "y", data=df, kind="bar", palette=sns.cubehelix_palette(100), size=6, aspect=2, legend_out=False)
-    ax.set_axis_labels("occupation", "number")
+    ax = sns.factorplot("x", "y", data=df, kind="bar", size=6, aspect=2, legend_out=False)
+    ax.set_axis_labels("occupation", "percent")
     ax.set_xticklabels(rotation=90)
     plt.tight_layout()
 
@@ -32,20 +34,22 @@ def count_all(dic):
 ##общий график для языков
 def draw_all_lang(dic):
     lang = {}
+    temp = 0
     for k in dic:
         if dic[k]['langLabel']:
-            for i in dic[k]['langLabel']:
-                if i in lang:
-                    lang[i] += 1
-                else:
-                    lang[i] = 1
-
-    ys = [lang[n] for n in lang if n != 'русский язык']
+            if 'русский язык' in dic[k]['langLabel']:
+                for i in dic[k]['langLabel']:
+                    if i in lang:
+                        lang[i] += 1
+                    else:
+                        lang[i] = 1
+                    temp += 1
+    ys = [(lang[n]/temp)*100 for n in lang if n != 'русский язык']
     xs = [n for n in lang if n != 'русский язык']
     df = pd.DataFrame(dict(x=xs, y=ys))
-    ax = sns.factorplot("x", "y", data=df, kind="bar", palette=sns.cubehelix_palette(103), size=6, aspect=2,
+    ax = sns.factorplot("x", "y", data=df, kind="bar", size=6, aspect=2,
                         legend_out=False)
-    ax.set_axis_labels("language", "number")
+    ax.set_axis_labels("language", "percent")
     ax.set_xticklabels(rotation=90)
     plt.tight_layout()
 
@@ -55,25 +59,29 @@ def draw_all_lang(dic):
 
 ##рисуем график языка от пола
 def draw_lang_gen(dic):
-    print('hei')
     fem = {}
     masc = {}
+    temp_f = 0
+    temp_m = 0
     for k in dic:
         if dic[k]['langLabel'] and dic[k]['sexLabel']:
-            if dic[k]['sexLabel'] == 'женский пол':
-                for i in dic[k]['langLabel']:
-                    if i in fem:
-                        fem[i] += 1
-                    else:
-                        fem[i] = 1
-            else:
-                for i in dic[k]['langLabel']:
-                    if i in masc:
-                        masc[i] += 1
-                    else:
-                        masc[i] = 1
-    f = {n: fem[n] for n in fem if n != 'русский язык'}
-    m = {n: masc[n] for n in masc if n != 'русский язык'}
+            if 'русский язык' in dic[k]['langLabel']:
+                if dic[k]['sexLabel'] == 'женский пол':
+                    for i in dic[k]['langLabel']:
+                        if i in fem:
+                            fem[i] += 1
+                        else:
+                            fem[i] = 1
+                        temp_f += 1
+                else:
+                    for i in dic[k]['langLabel']:
+                        if i in masc:
+                            masc[i] += 1
+                        else:
+                            masc[i] = 1
+                        temp_m += 1
+    f = {n: (fem[n]/temp_f)*100 for n in fem if n != 'русский язык'}
+    m = {n: (masc[n]/temp_m)*100 for n in masc if n != 'русский язык'}
     occupation_m = {n: n for n in masc if n != 'русский язык'}
     occupation_f = {n: n for n in fem if n != 'русский язык'}
     oc_fin = {}
@@ -89,7 +97,7 @@ def draw_lang_gen(dic):
     df_fin = pd.melt(df, id_vars='occ', var_name='sex', value_name='occupations')
 
     ax = sns.factorplot(x="occ", y="occupations", hue='sex', data=df_fin, kind="bar", size=6, aspect=2, legend_out=False)
-    ax.set_axis_labels("language", "number")
+    ax.set_axis_labels("language", "percent")
     ax.set_xticklabels(rotation=90)
     plt.tight_layout()
 
@@ -99,9 +107,10 @@ def draw_lang_gen(dic):
 
 ##рисуем график профессий от пола
 def draw_gender(dic):
-    print('hei')
     fem = {}
     masc = {}
+    temp_m = 0
+    temp_f = 0
     for k in dic:
         if dic[k]['occupationLabel'] and dic[k]['sexLabel']:
             if dic[k]['sexLabel'] == 'женский пол':
@@ -110,17 +119,19 @@ def draw_gender(dic):
                         fem[i] += 1
                     else:
                         fem[i] = 1
+                    temp_f += 1
             else:
                 for i in dic[k]['occupationLabel']:
                     if i in masc:
                         masc[i] += 1
                     else:
                         masc[i] = 1
+                    temp_m += 1
     musor = ['автор', 'проза', 'драматургия', 'писатель', 'поэт', 'автор дневника', 'публицистика', 'мемуарист',
              'автобиограф', 'писатель-фантаст', 'детский писатель', 'романист', 'биограф', 'прозаик', 'эссеист',
              'новеллист', 'поэт-песенник']
-    f = {n: fem[n] for n in fem if fem[n] > 5 and n not in musor}
-    m = {n: masc[n] for n in masc if masc[n] > 5 and n not in musor}
+    f = {n: (fem[n]/temp_f)*100 for n in fem if fem[n] > 5 and n not in musor}
+    m = {n: (masc[n]/temp_m)*100 for n in masc if masc[n] > 5 and n not in musor}
     occupation_m = {n: n for n in masc if masc[n] > 5 and n not in musor}
     occupation_f = {n: n for n in fem if fem[n] > 5 and n not in musor}
     oc_fin = {}
@@ -136,13 +147,40 @@ def draw_gender(dic):
     df_fin = pd.melt(df, id_vars='occ', var_name='sex', value_name='occupations')
 
     ax = sns.factorplot(x="occ", y="occupations", hue='sex', data=df_fin, kind="bar", size=6, aspect=2, legend_out=False)
-    ax.set_axis_labels("occupation", "number")
+    ax.set_axis_labels("occupation", "percent")
     ax.set_xticklabels(rotation=90)
     plt.tight_layout()
 
     plt.savefig('occup_sex.png', format='png')
     plt.show()
 
+
+def change_percent(dic):
+    temp_dic = {}
+    print(dic)
+    for occ in dic:
+        for period in dic[occ]:
+            if period in temp_dic:
+                temp_dic[period][occ] = dic[occ][period]
+            else:
+                temp_dic[period] = {}
+                temp_dic[period][occ] = dic[occ][period]
+    print(temp_dic)
+    for period in temp_dic:
+        temp = 0
+        for occ in temp_dic[period]:
+            temp += temp_dic[period][occ]
+        for occ in temp_dic[period]:
+            temp_dic[period][occ] = (temp_dic[period][occ]/temp)*100
+    rez_dic = {}
+    for period in temp_dic:
+        for occ in temp_dic[period]:
+            if occ in rez_dic:
+                rez_dic[occ][period] = temp_dic[period][occ]
+            else:
+                rez_dic[occ] = {}
+                rez_dic[occ][period] = temp_dic[period][occ]
+    return rez_dic
 
 
 def draw_occ_time(dic):
@@ -192,21 +230,24 @@ def draw_occ_time(dic):
                 else:
                     occupation[occ] = {}
                     occupation[occ][str(t)] = 1
-    new_d = {'time_period':time_per}
     #print(occupation)
+    #change_percent(occupation)
     musor = ['автор', 'проза', 'драматургия', 'писатель', 'поэт', 'автор дневника', 'публицистика', 'мемуарист',
              'автобиограф', 'писатель-фантаст', 'детский писатель', 'романист', 'биограф', 'прозаик', 'эссеист',
              'новеллист', 'поэт-песенник']
+    new_d = {}
     for occ in occupation:
         if len(occupation[occ]) > 5 and occ not in musor:
             new_d[occ] = occupation[occ]
+    new_d = change_percent(new_d)
+    new_d['time_period'] = time_per
     df = pd.DataFrame(new_d)
     #print(df)
     df_f = pd.melt(df, id_vars='time_period', var_name='occupation', value_name='number')
     #print(df_f)
 
     ax = sns.factorplot(x="time_period", y="number", hue='occupation', data=df_f, kind="bar", size=6, aspect=2, legend_out=False)
-    ax.set_axis_labels("occupation", "number")
+    ax.set_axis_labels("occupation", "percent")
     #ax.set_xticklabels(rotation=90)
     plt.tight_layout()
 
@@ -221,57 +262,60 @@ def draw_lang_time(dic):
     occupation = {}
     for k in dic:
         if dic[k]['death_year'] and dic[k]['langLabel']:
-            death = int(dic[k]['death_year'])
-            t = 0
-            if death < 1200:
-                t = 1200
-            elif death < 1300:
-                t = 1300
-            elif death < 1450:
-                t = 1450
-            elif death < 1550:
-                t = 1550
-            elif death < 1600:
-                t = 1600
-            elif death < 1650:
-                t = 1650
-            elif death < 1700:
-                t = 1700
-            elif death < 1750:
-                t = 1750
-            elif death < 1800:
-                t = 1800
-            elif death < 1850:
-                t = 1850
-            elif death < 1900:
-                t = 1900
-            elif death < 1950:
-                t = 1950
-            elif death < 2000:
-                t = 2000
-            else:
-                t = 2050
-            for occ in dic[k]['langLabel']:
-                if occ in occupation:
-                    if str(t) in occupation[occ]:
-                        occupation[occ][str(t)] += 1
-                    else:
-                        occupation[occ][str(t)] = 1
+            if 'русский язык' in dic[k]['langLabel']:
+                death = int(dic[k]['death_year'])
+                t = 0
+                if death < 1200:
+                    t = 1200
+                elif death < 1300:
+                    t = 1300
+                elif death < 1450:
+                    t = 1450
+                elif death < 1550:
+                    t = 1550
+                elif death < 1600:
+                    t = 1600
+                elif death < 1650:
+                    t = 1650
+                elif death < 1700:
+                    t = 1700
+                elif death < 1750:
+                    t = 1750
+                elif death < 1800:
+                    t = 1800
+                elif death < 1850:
+                    t = 1850
+                elif death < 1900:
+                    t = 1900
+                elif death < 1950:
+                    t = 1950
+                elif death < 2000:
+                    t = 2000
                 else:
-                    occupation[occ] = {}
-                    occupation[occ][str(t)] = 1
-    new_d = {'time_period':time_per}
+                    t = 2050
+                for occ in dic[k]['langLabel']:
+                    if occ in occupation:
+                        if str(t) in occupation[occ]:
+                            occupation[occ][str(t)] += 1
+                        else:
+                            occupation[occ][str(t)] = 1
+                    else:
+                        occupation[occ] = {}
+                        occupation[occ][str(t)] = 1
+    new_d = {}
     #print(occupation)
     for occ in occupation:
         if len(occupation[occ]) > 3 and occ != 'русский язык':
             new_d[occ] = occupation[occ]
+    new_d = change_percent(new_d)
+    new_d['time_period'] = time_per
     df = pd.DataFrame(new_d)
     print(df)
     df_f = pd.melt(df, id_vars='time_period', var_name='occupation', value_name='number')
     #print(df_f)
 
     ax = sns.factorplot(x="time_period", y="number", hue='occupation', data=df_f, kind="bar", size=6, aspect=2, legend_out=False)
-    ax.set_axis_labels("occupation", "number")
+    ax.set_axis_labels("occupation", "percent")
     #ax.set_xticklabels(rotation=90)
     plt.tight_layout()
 
@@ -422,10 +466,10 @@ def main():
     #draw_gender(dict)
     #draw_lang_gen(dict)
     #draw_all_lang(dict)
-    #draw_occ_time(dict)
-    #draw_lang_time(dict)
+    draw_occ_time(dict)
+    draw_lang_time(dict)
     #draw_occ_men(dict)
-    draw_occ_women(dict)
+    #draw_occ_women(dict)
 
 
 if __name__ == '__main__':
