@@ -4,8 +4,12 @@
     <list default="true" id="8f8f89b7-263c-429a-9749-ae94847bfb74" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/draw_charts.py" afterPath="$PROJECT_DIR$/draw_charts.py" />
+      <change beforePath="$PROJECT_DIR$/lang_all.png" afterPath="$PROJECT_DIR$/lang_all.png" />
+      <change beforePath="$PROJECT_DIR$/lang_sex.png" afterPath="$PROJECT_DIR$/lang_sex.png" />
+      <change beforePath="$PROJECT_DIR$/lang_time.png" afterPath="$PROJECT_DIR$/lang_time.png" />
       <change beforePath="$PROJECT_DIR$/occup_all.png" afterPath="$PROJECT_DIR$/occup_all.png" />
       <change beforePath="$PROJECT_DIR$/occup_sex.png" afterPath="$PROJECT_DIR$/occup_sex.png" />
+      <change beforePath="$PROJECT_DIR$/occup_time.png" afterPath="$PROJECT_DIR$/occup_time.png" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -19,15 +23,17 @@
       <file leaf-file-name="draw_charts.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/draw_charts.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-402">
-              <caret line="401" column="35" lean-forward="false" selection-start-line="401" selection-start-column="35" selection-end-line="401" selection-end-column="35" />
+            <state relative-caret-position="25">
+              <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
-                <element signature="e#137#1109#0" expanded="false" />
-                <element signature="e#1166#1848#0" expanded="false" />
-                <element signature="e#1909#3313#0" expanded="false" />
-                <element signature="e#3376#5112#0" expanded="false" />
-                <element signature="e#7829#10158#0" expanded="false" />
+                <element signature="e#137#1124#0" expanded="false" />
+                <element signature="e#1181#1955#0" expanded="false" />
+                <element signature="e#2016#3634#0" expanded="false" />
+                <element signature="e#3697#5537#0" expanded="false" />
+                <element signature="e#6441#9175#0" expanded="false" />
+                <element signature="e#11825#14522#0" expanded="false" />
+                <element signature="e#14553#17186#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -36,8 +42,8 @@
       <file leaf-file-name="new_results.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/new_results.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="200">
+              <caret line="0" column="1041019" lean-forward="true" selection-start-line="0" selection-start-column="1041019" selection-end-line="0" selection-end-column="1041019" />
               <folding />
             </state>
           </provider>
@@ -85,6 +91,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>occupation</find>
+      <find>русский</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -262,7 +269,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="1" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -332,23 +339,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/new_results.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="200">
+          <caret line="0" column="1041019" lean-forward="true" selection-start-line="0" selection-start-column="1041019" selection-end-line="0" selection-end-column="1041019" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/draw_charts.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-402">
-          <caret line="401" column="35" lean-forward="false" selection-start-line="401" selection-start-column="35" selection-end-line="401" selection-end-column="35" />
+        <state relative-caret-position="25">
+          <caret line="183" column="0" lean-forward="true" selection-start-line="183" selection-start-column="0" selection-end-line="183" selection-end-column="0" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
-            <element signature="e#137#1109#0" expanded="false" />
-            <element signature="e#1166#1848#0" expanded="false" />
-            <element signature="e#1909#3313#0" expanded="false" />
-            <element signature="e#3376#5112#0" expanded="false" />
-            <element signature="e#7829#10158#0" expanded="false" />
+            <element signature="e#137#1124#0" expanded="false" />
+            <element signature="e#1181#1955#0" expanded="false" />
+            <element signature="e#2016#3634#0" expanded="false" />
+            <element signature="e#3697#5537#0" expanded="false" />
+            <element signature="e#6441#9175#0" expanded="false" />
+            <element signature="e#11825#14522#0" expanded="false" />
+            <element signature="e#14553#17186#0" expanded="false" />
           </folding>
         </state>
       </provider>
